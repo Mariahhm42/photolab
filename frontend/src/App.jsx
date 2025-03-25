@@ -13,16 +13,22 @@ const sampleDataForPhotoListItem = {
   profile: "/profile-1.jpg",
 };
 
-// Create an array of 3 photo objects (you can add more photo objects if needed)
-const photos = new Array(3).fill(sampleDataForPhotoListItem);
+// creates an array of 3 photo objects
+const photos = [...Array(3)];
 
-const App = () => (
-  <div className="App">
-    <h1>Photo Labs</h1>
-    {photos.map((photo, index) => (
-      <PhotoListItem key={index} photo={photo} />
-    ))}
-  </div>
-);
+const App = () => {
+  // this Maps over the array to generate PhotoListItem components
+  const photoItems = photos.map((_, index) => (
+    <PhotoListItem key={index} photo={sampleDataForPhotoListItem} />
+  ));
+
+  return (
+    <div className="App">
+      <h1>Photo Labs</h1>
+      {photoItems}
+    </div>
+  );
+};
+
 
 export default App;
