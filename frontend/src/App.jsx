@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PhotoList from "./components/PhotoList"; //Import PhotoList
-import TopNavigationBar from './components/TopNavigationBar'; // Import TopNavigationBar 
+//import TopNavigationBar from './components/TopNavigationBar'; // Import TopNavigationBar 
+import HomeRoute from './components/HomeRoute'; // Import the new HomeRoute
 
 import './App.scss';
 
@@ -9,9 +10,8 @@ const App = () => {
 
   return (
   <div className="App">
-    <PhotoList />
-    <TopNavigationBar isFavPhotoExist={isFavPhotoExist}/>
-    
+    <HomeRoute />
+    <PhotoList /> 
   </div>
   );
 };
