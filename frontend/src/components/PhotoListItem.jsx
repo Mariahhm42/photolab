@@ -1,21 +1,21 @@
 import React from 'react';
 import "../styles/PhotoListItem.scss";
+import PhotoFavButton from './PhotoFavButton';
 
 const PhotoListItem = ({ photo }) => {
-  const { id, location, imageSource, username, profile } = photo;
-
   return (
     <div className="photo-list__item">
-      <img src={imageSource} alt={`Photo ${id}`} className="photo-list__image" />
+      <img src={photo.imageSource} alt="Photo" className="photo-list__image" />
       <div className="photo-list__user-details">
-        <img src={profile} alt={`${username}'s profile`} className="photo-list__user-profile" />
+        <img src={photo.profile} alt="User" className="photo-list__user-profile" />
         <div className="photo-list__user-info">
-          <p>{username}</p>
+          <div>{photo.username}</div>
           <div className="photo-list__user-location">
-            <p>{location.city}, {location.country}</p>
+            {photo.location.city}, {photo.location.country}
           </div>
         </div>
       </div>
+      <PhotoFavButton /> {/* Like button for each photo */}
     </div>
   );
 };
