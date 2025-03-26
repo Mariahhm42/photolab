@@ -1,22 +1,13 @@
 import React from 'react';
-import PhotoListItem from './components/PhotoListItem';
-import PhotoList from "./components/PhotoList";
-import './App.scss';
+import PhotoList from "./components/PhotoList"; //Import PhotoList
+import TopicList from "./components/TopicList"; // Import TopicList
 
-const sampleDataForPhotoListItem = {
-  id: "1",
-  location: {
-    city: "Montreal",
-    country: "Canada",
-  },
-  imageSource: "/Image-1-Regular.jpeg",
-  username: "Joe Example",
-  profile: "/profile-1.jpg",
-};
+import './App.scss';
 
 const App = () => (
   <div className="App">
     <PhotoList />
+    <TopicList />
   </div>
 );
 

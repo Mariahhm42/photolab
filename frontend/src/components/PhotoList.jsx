@@ -31,7 +31,7 @@ const sampleDataForPhotoList = [
     },
     user: {
       username: "exampleuser",
-      name: "Joe Example",
+      name: "Not Joe",
       profile: "/profile-1.jpg",
     },
   },
@@ -47,7 +47,7 @@ const sampleDataForPhotoList = [
     },
     user: {
       username: "exampleuser",
-      name: "Joe Example",
+      name: "Maybe Joe",
       profile: "/profile-1.jpg",
     },
   },
