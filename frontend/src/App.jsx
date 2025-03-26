@@ -1,5 +1,6 @@
 import React from 'react';
 import PhotoListItem from './components/PhotoListItem';
+import PhotoList from "./components/PhotoList";
 import './App.scss';
 
 const sampleDataForPhotoListItem = {
@@ -13,22 +14,10 @@ const sampleDataForPhotoListItem = {
   profile: "/profile-1.jpg",
 };
 
-// creates an array of 3 photo objects
-const photos = [...Array(3)];
-
-const App = () => {
-  // this Maps over the array to generate PhotoListItem components
-  const photoItems = photos.map((_, index) => (
-    <PhotoListItem key={index} photo={sampleDataForPhotoListItem} />
-  ));
-
-  return (
-    <div className="App">
-      <h1>Photo Labs</h1>
-      {photoItems}
-    </div>
-  );
-};
-
+const App = () => (
+  <div className="App">
+    <PhotoList />
+  </div>
+);
 
 export default App;
