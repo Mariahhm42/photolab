@@ -1,7 +1,5 @@
 import React from 'react';
 import "../styles/PhotoListItem.scss";
-//import PropTypes from "prop-types"; // Import prop-types for validation
-//import PhotoFavButton from './PhotoFavButton';
 
 const PhotoListItem = ({ photo }) => {
   return (

@@ -4,7 +4,6 @@ import './App.scss';
 
 // Import mock data
 import photos from './mocks/photos.js';
-
 import topics from './mocks/topics.js'; 
 
 
