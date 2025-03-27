@@ -6,7 +6,7 @@ import '../styles/HomeRoute.scss'; // Include styling for HomeRoute
 const HomeRoute = () => {
   return (
     <div className="home-route">
-      {/* Top Navigation Bar */}
+      {/*renders the Top Navigation Bar */}
       <TopNavigationBar />
 
       {/* Photos Section */}
