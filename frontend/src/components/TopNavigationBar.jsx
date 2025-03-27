@@ -2,6 +2,7 @@ import React from 'react';
 import FavBadge from './FavBadge';
 import TopicList from './TopicList';
 import '../styles/TopNavigationBar.scss';
+ 
 
 const TopNavigationBar = ({ topics }) => {
   return (
@@ -13,6 +14,7 @@ const TopNavigationBar = ({ topics }) => {
       <FavBadge isFavPhotoExist={false} />
     </div>
   );
+
 };
 
 export default TopNavigationBar;
