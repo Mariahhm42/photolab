@@ -4,17 +4,17 @@ import TopicList from './TopicList';
 import '../styles/TopNavigationBar.scss';
  
 
-const TopNavigationBar = ({ topics }) => {
+const TopNavigationBar = ({ topics, favouritePhotos }) => {
   return (
-    <div className="top-nav-bar">
-      <span className="top-nav-bar__logo">PhotoLabs</span>
-       {/* Add the TopicList for selecting photo topics */}
-      <TopicList topics={topics}/>
-      {/* Pass isFavPhotoExist to FavBadge */}
-      <FavBadge isFavPhotoExist={false} />
-    </div>
+    <nav className="top-nav">
+      {topics.map((topic) => (
+        <button key={topic.id}>{topic.title}</button>
+      ))}
+      <div className="favourites">
+        ❤️ {favouritePhotos.length} Liked
+      </div>
+    </nav>
   );
-
 };
 
 export default TopNavigationBar;
