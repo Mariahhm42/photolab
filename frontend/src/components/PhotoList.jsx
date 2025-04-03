@@ -6,7 +6,10 @@ const PhotoList = ({ photos, favouritePhotos, toggleFavourite }) => {
   return (
     <div className="photo-list">
       {photos.map((photo) => (
-        <div key={photo.id} className="photo-item">
+        
+        
+        <div key={photo.id} 
+        className="photo-item">
           <img src={photo.urls.regular} alt={photo.location.city} />
           <button onClick={() => toggleFavourite(photo.id)}>
             {favouritePhotos.includes(photo.id) ? "❤️" : "🤍"}

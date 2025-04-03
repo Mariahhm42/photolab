@@ -1,16 +1,19 @@
 import React from 'react';
+import PhotoFavButton from "./PhotoFavButton";
 import "../styles/PhotoListItem.scss";
 
-const PhotoListItem = ({ photo }) => {
+const PhotoListItem = ({ photo, favourites, toggleFavourite }) => {
   return (
-    <div className="photo-list__item">
-      <img src={photo.imageSource} alt={photo.description} className="photo-list__image" />
-      <div className="photo-list__info">
-        <p>{photo.location.city}, {photo.location.country}</p>
-        <p>{photo.username}</p>
-      </div>
-    </div>
-  );
+    <div className="photo-item">
+    <img src={photo.urls.regular} alt={photo.location.city} />
+    <PhotoFavButton
+      photoId={photo.id}
+      favourites={favourites}
+      toggleFavourite={toggleFavourite}
+    />
+  </div>
+);
 };
+
 
 export default PhotoListItem;
