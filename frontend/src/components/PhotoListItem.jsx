@@ -2,13 +2,14 @@ import React from 'react';
 import PhotoFavButton from './PhotoFavButton';
 import "../styles/PhotoListItem.scss";
 
-const PhotoListItem = ({ photo, favouritePhotos, toggleFavourite }) => {
+const PhotoListItem = ({ photo, favouritePhotos, toggleFavourite, onClick }) => {
   return (
     <div className="photo-list__item">
       <img
         src={photo.urls.regular}
         alt={`Photo by ${photo.user.name} in ${photo.location.city}`}
         className="photo-list__image"
+        onClick={onClick} // Add the onClick event handler here
       />
       <div className="photo-list__info">
         <p>{photo.location.city}, {photo.location.country}</p>

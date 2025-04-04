@@ -30,7 +30,7 @@ const HomeRoute = ({ photos, topics, favouritePhotos, toggleFavourite }) => {
         />
       )}
       
-      {/* Pass photos, favouritePhotos, and toggleFavourite to PhotoList */}
+      {/* Pass photos, favouritePhotos, toggleFavourite, and onPhotoClick to PhotoList */}
       <PhotoList
         photos={photos}
         favouritePhotos={favouritePhotos}

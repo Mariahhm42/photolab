@@ -3,7 +3,7 @@ import PhotoListItem from "./PhotoListItem";
 import PhotoDetailsModal from '../routes/PhotoDetailsModal'; // Correct import path
 import "../styles/PhotoList.scss";
 
-const PhotoList = ({ photos, favouritePhotos, toggleFavourite, onPhotoClick }) => {
+const PhotoList = ({ photos, favouritePhotos, toggleFavourite, onPhotoClick, setDisplayModal }) => {
   return (
     <div className="photo-list">
       {photos.map((photo) => (
@@ -12,7 +12,10 @@ const PhotoList = ({ photos, favouritePhotos, toggleFavourite, onPhotoClick }) =
           photo={photo}
           favouritePhotos={favouritePhotos}
           toggleFavourite={toggleFavourite}
-          onClick={() => onPhotoClick(photo)} // Pass the photo data when clicked
+          onClick={() => {
+            onPhotoClick(photo); // Set the selected photo
+            setDisplayModal(true); // Trigger the modal display
+          }}
         />
       ))}
     </div>
