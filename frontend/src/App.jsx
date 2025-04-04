@@ -55,6 +55,8 @@ function App() {
           photo={selectedPhoto} // Pass the selected photo to the modal
           closeModal={closeModal} // Pass the closeModal function to the modal
           similarPhotos={similarPhotos} // Pass similar photos to the modal
+          favouritePhotos={favouritePhotos} // Pass favouritePhotos for correct rendering
+          toggleFavourite={toggleFavourite} // Ensure favourite toggle works inside modal
         />
       )}
     </div>

@@ -36,6 +36,8 @@ const HomeRoute = ({ photos, topics, favouritePhotos, toggleFavourite }) => {
           photo={selectedPhoto} // Pass the selected photo data
           onClose={handleCloseModal} // Pass the close handler
           similarPhotos={similarPhotos} // Pass similar photos to the modal
+          favouritePhotos={favouritePhotos} // Pass the favourite photos state
+          toggleFavourite={toggleFavourite} // Pass the toggle function
         />
       )}
       
