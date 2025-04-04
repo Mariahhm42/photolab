@@ -20,6 +20,7 @@ function App() {
 
   return (
     <div className="App">
+      
       {/* Pass favourites state and toggle function to HomeRoute */}
       <HomeRoute
         photos={photos}

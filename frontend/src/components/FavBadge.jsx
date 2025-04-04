@@ -2,13 +2,14 @@ import React from 'react';
 import FavIcon from './FavIcon';
 import '../styles/FavBadge.scss';
 
-const FavBadge = ({ isFavPhotoExist }) => {
+const FavBadge = ({ isFavPhotoExist, count }) => {
   return (
     <div className='fav-badge'>
-    {/* {isFavPhotoExist && <FavIcon displayAlert={true} />} Render FavIcon only if isFavPhotoExist is true */}
-    <FavIcon displayAlert={isFavPhotoExist} />
+      <FavIcon displayAlert={isFavPhotoExist} />
+      {isFavPhotoExist && <span className="fav-count">{count}</span>}
     </div>
-  ) 
+  );
 };
+
 
 export default FavBadge;

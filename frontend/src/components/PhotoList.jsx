@@ -1,20 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import PhotoListItem from "./PhotoListItem";
 import "../styles/PhotoList.scss";
 
-const PhotoList = ({ photos, favouritePhotos, toggleFavourite }) => {
+const PhotoList = ({ photos }) => {
+  const [favourites, setFavourites] = useState([]); // State to manage favourites
+
+  const toggleFavourite = (photoId) => {
+    setFavourites((prevFavourites) => {
+      if (prevFavourites.includes(photoId)) {
+        return prevFavourites.filter((id) => id !== photoId); // Remove from favourites
+      } else {
+        return [...prevFavourites, photoId]; // Add to favourites
+      }
+    });
+  };
+
   return (
     <div className="photo-list">
       {photos.map((photo) => (
-        
-        
-        <div key={photo.id} 
-        className="photo-item">
-          <img src={photo.urls.regular} alt={photo.location.city} />
-          <button onClick={() => toggleFavourite(photo.id)}>
-            {favouritePhotos.includes(photo.id) ? "❤️" : "🤍"}
-          </button>
-        </div>
+        <PhotoListItem
+          key={photo.id}
+          photo={photo}
+          favourites={favourites} // Pass favourites to PhotoListItem
+          toggleFavourite={toggleFavourite} // Pass toggle function to PhotoListItem
+        />
       ))}
     </div>
   );
