@@ -1,27 +1,24 @@
 import React, { useState } from 'react';
-import HomeRoute from './components/HomeRoute'; // Import the new HomeRoute
+import HomeRoute from './components/HomeRoute';
 import './App.scss';
 // Import mock data
 import photos from './mocks/photos';
-import topics from './mocks/topics'; 
+import topics from './mocks/topics';
 
 function App() {
-  // State to track favourite photos (stored as an array of photo IDs)
   const [favouritePhotos, setFavouritePhotos] = useState([]);
 
-  // Function to toggle favourites
+  // Global toggle function: adds or removes a photo ID from favourites
   const toggleFavourite = (photoId) => {
     setFavouritePhotos((prevFavourites) =>
       prevFavourites.includes(photoId)
-        ? prevFavourites.filter((id) => id !== photoId) // Remove if already liked
-        : [...prevFavourites, photoId] // Add if not already liked
+        ? prevFavourites.filter((id) => id !== photoId)
+        : [...prevFavourites, photoId]
     );
   };
 
   return (
     <div className="App">
-      
-      {/* Pass favourites state and toggle function to HomeRoute */}
       <HomeRoute
         photos={photos}
         topics={topics}

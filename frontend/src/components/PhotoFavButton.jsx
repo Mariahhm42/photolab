@@ -1,20 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
 import "../styles/PhotoFavButton.scss";
 
-const PhotoFavButton = ({ photoId, toggleFavourite }) => {
-  const [isLiked, setIsLiked] = useState(false); // Local state to manage liked state
+const PhotoFavButton = ({ photoId, favouritePhotos, toggleFavourite }) => {
+  const isFavourite = favouritePhotos.includes(photoId);
 
+  // When clicked, this button will update the global state via toggleFavourite
   const handleClick = () => {
-    setIsLiked((prevState) => !prevState); // Toggle like state
-    toggleFavourite(photoId); // Call parent function to update the global favourites list
+    toggleFavourite(photoId);
   };
 
   return (
     <button
-      className={`photo-list__fav-icon ${isLiked ? 'active' : ''}`}
+      className={`photo-list__fav-icon ${isFavourite ? 'active' : ''}`}
       onClick={handleClick}
     >
-      {isLiked ? "❤️" : "🤍"} {/* Heart icon based on like state */}
+      {isFavourite ? "❤️" : "🤍"}
     </button>
   );
 };

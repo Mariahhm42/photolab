@@ -1,11 +1,10 @@
 import React from 'react';
-import PhotoFavButton from './PhotoFavButton'; // Import the PhotoFavButton component
+import PhotoFavButton from './PhotoFavButton';
 import "../styles/PhotoListItem.scss";
 
-const PhotoListItem = ({ photo, favourites, toggleFavourite }) => {
+const PhotoListItem = ({ photo, favouritePhotos, toggleFavourite }) => {
   return (
     <div className="photo-list__item">
-      {/* Use photo.urls.regular as the image source */}
       <img
         src={photo.urls.regular}
         alt={`Photo by ${photo.user.name} in ${photo.location.city}`}
@@ -14,14 +13,13 @@ const PhotoListItem = ({ photo, favourites, toggleFavourite }) => {
       <div className="photo-list__info">
         <p>{photo.location.city}, {photo.location.country}</p>
         <p>{photo.user.username}</p>
+        {/* Pass global state and function to the favourite button */}
+        <PhotoFavButton
+          photoId={photo.id}
+          favouritePhotos={favouritePhotos}
+          toggleFavourite={toggleFavourite}
+        />
       </div>
-
-      {/* Add PhotoFavButton here */}
-      <PhotoFavButton
-        photoId={photo.id} // Pass the photo ID
-        favourites={favourites} // Pass the favourites state
-        toggleFavourite={toggleFavourite} // Pass the toggle function
-      />
     </div>
   );
 };

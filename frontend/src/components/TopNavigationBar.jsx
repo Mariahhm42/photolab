@@ -1,16 +1,19 @@
 import React from 'react';
-import FavBadge from './FavBadge';
 import TopicList from './TopicList';
+import FavIcon from './FavIcon';
 import '../styles/TopNavigationBar.scss';
 
 const TopNavigationBar = ({ topics, favouritePhotos }) => {
-  const isFavPhotoExist = favouritePhotos.length > 0;
+  const favCount = favouritePhotos.length;
+  const isSelected = favCount > 0;
 
   return (
     <div className="top-nav-bar">
       <span className="top-nav-bar__logo">PhotoLabs</span>
       <TopicList topics={topics} />
-      <FavBadge isFavPhotoExist={isFavPhotoExist} />
+      <div className="top-nav-bar__fav-icon">
+        <FavIcon selected={isSelected} favouriteCount={favCount} />
+      </div>
     </div>
   );
 };
