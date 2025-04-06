@@ -1,55 +1,96 @@
-import { useState, useEffect } from 'react';
+import { useReducer, useEffect } from 'react';
 import photosData from '../mocks/photos';
 import topicsData from '../mocks/topics';
 
-const useApplicationData = () => {
-  // Entire application state
-  const [photos, setPhotos] = useState([]);
-  const [topics, setTopics] = useState([]);
-  const [favouritePhotos, setFavouritePhotos] = useState([]);
-  const [selectedPhoto, setSelectedPhoto] = useState(null);
-  const [displayModal, setDisplayModal] = useState(false);
+export const ACTIONS = {
+  FAV_PHOTO_ADDED: 'FAV_PHOTO_ADDED',
+  FAV_PHOTO_REMOVED: 'FAV_PHOTO_REMOVED',
+  SET_PHOTO_DATA: 'SET_PHOTO_DATA',
+  SET_TOPIC_DATA: 'SET_TOPIC_DATA',
+  SELECT_PHOTO: 'SELECT_PHOTO',
+  DISPLAY_PHOTO_DETAILS: 'DISPLAY_PHOTO_DETAILS',
+};
 
-  // Load initial data (simulate API calls with mock data)
+const initialState = {
+  photos: [],
+  topics: [],
+  favouritePhotos: [],
+  selectedPhoto: null,
+  displayModal: false,
+};
+
+function reducer(state, action) {
+  switch (action.type) {
+    case ACTIONS.FAV_PHOTO_ADDED:
+      return {
+        ...state,
+        favouritePhotos: [...state.favouritePhotos, action.payload.id],
+      };
+    case ACTIONS.FAV_PHOTO_REMOVED:
+      return {
+        ...state,
+        favouritePhotos: state.favouritePhotos.filter((id) => id !== action.payload.id),
+      };
+    case ACTIONS.SET_PHOTO_DATA:
+      return {
+        ...state,
+        photos: action.payload.photos,
+      };
+    case ACTIONS.SET_TOPIC_DATA:
+      return {
+        ...state,
+        topics: action.payload.topics,
+      };
+    case ACTIONS.SELECT_PHOTO:
+      return {
+        ...state,
+        selectedPhoto: action.payload.photo,
+      };
+    case ACTIONS.DISPLAY_PHOTO_DETAILS:
+      return {
+        ...state,
+        displayModal: action.payload.displayModal,
+      };
+    default:
+      throw new Error(`Tried to reduce with unsupported action type: ${action.type}`);
+  }
+}
+
+const useApplicationData = () => {
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  // Load initial data from mocks (simulate API call)
   useEffect(() => {
-    setPhotos(photosData);
-    setTopics(topicsData);
+    dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: { photos: photosData } });
+    dispatch({ type: ACTIONS.SET_TOPIC_DATA, payload: { topics: topicsData } });
   }, []);
 
-  // Action to toggle favourite photos
+  // Toggle favorite status: dispatches either FAV_PHOTO_ADDED or FAV_PHOTO_REMOVED
   const updateToFavPhotoIds = (photoId) => {
-    setFavouritePhotos((prevFavs) =>
-      prevFavs.includes(photoId)
-        ? prevFavs.filter((id) => id !== photoId)
-        : [...prevFavs, photoId]
-    );
+    if (state.favouritePhotos.includes(photoId)) {
+      dispatch({ type: ACTIONS.FAV_PHOTO_REMOVED, payload: { id: photoId } });
+    } else {
+      dispatch({ type: ACTIONS.FAV_PHOTO_ADDED, payload: { id: photoId } });
+    }
   };
 
-  // Action to select a photo and open the modal
+  // Set the selected photo and open the modal
   const setPhotoSelected = (photo) => {
-    setSelectedPhoto(photo);
-    setDisplayModal(true);
+    dispatch({ type: ACTIONS.SELECT_PHOTO, payload: { photo } });
+    dispatch({ type: ACTIONS.DISPLAY_PHOTO_DETAILS, payload: { displayModal: true } });
   };
 
-  // Action to close the modal
+  // Close the modal and clear the selected photo
   const onClosePhotoDetailsModal = () => {
-    setDisplayModal(false);
-    setSelectedPhoto(null);
-  };
-
-  // Function to get similar photos based on a criterion (e.g. same photographer)
-  const getSimilarPhotos = (photo) => {
-    return photos.filter(
-      (p) => p.user.username === photo.user.username && p.id !== photo.id
-    );
+    dispatch({ type: ACTIONS.DISPLAY_PHOTO_DETAILS, payload: { displayModal: false } });
+    dispatch({ type: ACTIONS.SELECT_PHOTO, payload: { photo: null } });
   };
 
   return {
-    state: { photos, topics, favouritePhotos, selectedPhoto, displayModal },
+    state,
     updateToFavPhotoIds,
     setPhotoSelected,
     onClosePhotoDetailsModal,
-    getSimilarPhotos,
   };
 };
 

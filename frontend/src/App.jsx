@@ -1,8 +1,7 @@
 import React from 'react';
 import HomeRoute from './components/HomeRoute';
 import './App.scss';
-import PhotoDetailsModal from './routes/PhotoDetailsModal';
-import useApplicationData from './hooks/useApplicationData';
+import useApplicationData, { ACTIONS } from './hooks/useApplicationData';
 
 const App = () => {
   const {
@@ -10,11 +9,9 @@ const App = () => {
     updateToFavPhotoIds,
     setPhotoSelected,
     onClosePhotoDetailsModal,
-    getSimilarPhotos,
   } = useApplicationData();
 
-  // Get similar photos if a photo is selected
-  const similarPhotos = state.selectedPhoto ? getSimilarPhotos(state.selectedPhoto) : [];
+  // You might derive similar photos in HomeRoute or elsewhere if needed
 
   return (
     <div className="App">
@@ -24,17 +21,10 @@ const App = () => {
         favouritePhotos={state.favouritePhotos}
         toggleFavourite={updateToFavPhotoIds}
         onPhotoClick={setPhotoSelected}
+        displayModal={state.displayModal}
+        selectedPhoto={state.selectedPhoto}
+        onClosePhotoDetailsModal={onClosePhotoDetailsModal}
       />
-
-      {state.displayModal && state.selectedPhoto && (
-        <PhotoDetailsModal
-          photo={state.selectedPhoto}
-          closeModal={onClosePhotoDetailsModal}
-          similarPhotos={similarPhotos}
-          favouritePhotos={state.favouritePhotos}
-          toggleFavourite={updateToFavPhotoIds}
-        />
-      )}
     </div>
   );
 };
