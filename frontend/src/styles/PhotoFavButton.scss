@@ -1,18 +1,21 @@
 .photo-list__fav-icon {
   position: relative;
-  top: 8px;
-  right: -8px;
   cursor: pointer;
-  margin-bottom: -30px;
-  border-width: 0.1px;
-  background-color: #EEEEEE;
-  width: 32px;
-  height: 32px;
+  margin: 24px;               // 24px margin for greater visual weight
+  padding: 16px;              // 16px padding on all sides (both lr and tb)
+  background-color: #EEEEEE;  // light gray background
+  border: 0.1px solid #E6E6E6; // subtle border for contrast
+  border-radius: 8px;         // 8px border-radius for rounded corners
   text-align: center;
-  border-radius: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .photo-list__fav-icon-svg {
-  padding: 7px;
-  top: 2px;
+  width: 24px;                // Set SVG width for clarity
+  height: 24px;               // Set SVG height for clarity
+  padding: 0;                 // Remove extra internal padding
+  position: relative;
+  top: 2px;                   // Adjust vertical alignment as needed
 }

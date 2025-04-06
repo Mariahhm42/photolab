@@ -1,48 +1,85 @@
 import React from 'react';
 import '../styles/PhotoDetailsModal.scss';
 import closeSymbol from '../assets/closeSymbol.svg';
-import PhotoList from '../components/PhotoList';  // Import PhotoList to show similar photos
-import PhotoFavButton from '../components/PhotoFavButton';  // Import favorite button
+import PhotoList from '../components/PhotoList';
+import PhotoFavButton from '../components/PhotoFavButton';
 
-const PhotoDetailsModal = ({ photo, onClose, similarPhotos, favouritePhotos, toggleFavourite }) => {
-  // Print out the photo data for now
-  console.log("Selected Photo Data: ", photo);
+const PhotoDetailsModal = ({
+  photo,
+  onClose,
+  similarPhotos,
+  favouritePhotos,
+  toggleFavourite
+}) => {
+  if (!photo) return null;
+
+  // Determine if the main photo is favorited
+  const isFavourite = favouritePhotos.includes(photo.id);
+
+  const handleFavouriteClick = () => {
+    toggleFavourite(photo.id);
+  };
 
   return (
     <div className="photo-details-modal">
-      {/* Close button */}
-      <button 
-        className="photo-details-modal__close-button"
-        onClick={onClose} // Trigger the close action
-      >
-        <img src={closeSymbol} alt="close symbol" />
-      </button>
+      {/* Dark overlay */}
+      <div className="photo-details-modal__overlay" onClick={onClose}></div>
 
-      {/* Modal content */}
-      <div className="photo-details-modal__content">
-        {/* Display the larger version of the selected photo */}
-        <img src={photo.urls.regular} 
-        alt={photo.alt_description} 
-        className="photo-details-modal__image" />
-        
-        {/* Favorite button inside the modal */}
-        <PhotoFavButton
-          photoId={photo.id}
-          favouritePhotos={favouritePhotos}
-          toggleFavourite={toggleFavourite} // Ensure toggleFavourite updates state
-        />
+      {/* Modal container */}
+      <div className="photo-details-modal__container">
+        {/* Close button over the main image, at top-left */}
+        <button
+          className="photo-details-modal__close-button"
+          onClick={onClose}
+        >
+          <img src={closeSymbol} alt="Close modal" />
+        </button>
 
-        <p>{photo.description}</p>
-        <p>Photographer: {photo.user.name}</p>
-        
-        {/* Display similar photos */}
-        <h3>Similar Photos</h3>
-        <PhotoList
-          photos={similarPhotos}  // Pass the similar photos
-          favouritePhotos={[]}    // You can pass favouritePhotos here if needed
-          toggleFavourite={() => {}}  // Pass a function to toggle favourites if needed
-          onPhotoClick={() => {}}  // handle photo click inside the modal
-        />
+        {/* Main content */}
+        <div className="photo-details-modal__content">
+          {/* Photo container */}
+          <div className="photo-details-modal__photo-container">
+            <img
+              src={photo.urls.regular}
+              alt={photo.alt_description || 'Photo'}
+              className="photo-details-modal__image"
+            />
+            {/* Heart icon now positioned on the left side (e.g., bottom-left) over the image */}
+            <div className="photo-details-modal__fav-icon">
+              <PhotoFavButton
+                photoId={photo.id}
+                favouritePhotos={favouritePhotos}
+                toggleFavourite={toggleFavourite}
+              />
+            </div>
+          </div>
+
+          {/* Photo details */}
+          <div className="photo-details-modal__info">
+            <h2 className="photo-details-modal__title">
+              {photo.description || 'Untitled Photo'}
+            </h2>
+            <p className="photo-details-modal__photographer">
+              Photographer: {photo.user.name}
+            </p>
+            {photo.location && (
+              <p className="photo-details-modal__location">
+                {photo.location.city}, {photo.location.country}
+              </p>
+            )}
+          </div>
+
+          {/* Similar photos section */}
+          <div className="photo-details-modal__similar">
+            <h3>Related Photos</h3>
+            <PhotoList
+              photos={similarPhotos}
+              favouritePhotos={favouritePhotos}
+              toggleFavourite={toggleFavourite}
+              onPhotoClick={() => {}} // Optionally disable clicks here
+            />
+          </div>
+        </div>
       </div>
     </div>
   );
