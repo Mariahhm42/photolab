@@ -1,6 +1,4 @@
 import { useReducer, useEffect } from 'react';
-import photosData from '../mocks/photos';
-import topicsData from '../mocks/topics';
 
 export const ACTIONS = {
   FAV_PHOTO_ADDED: 'FAV_PHOTO_ADDED',
@@ -52,6 +50,7 @@ function reducer(state, action) {
         displayModal: action.payload.displayModal,
       };
     default:
+      // Fixed: Wrap the error message with backticks so the template literal works as intended.
       throw new Error(`Tried to reduce with unsupported action type: ${action.type}`);
   }
 }
@@ -59,13 +58,19 @@ function reducer(state, action) {
 const useApplicationData = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  // Load initial data from mocks (simulate API call)
+  // Fetch photo and topic data from API
   useEffect(() => {
-    dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: { photos: photosData } });
-    dispatch({ type: ACTIONS.SET_TOPIC_DATA, payload: { topics: topicsData } });
+    Promise.all([
+      fetch('http://localhost:8001/api/photos').then((res) => res.json()),
+      fetch('http://localhost:8001/api/topics').then((res) => res.json()),
+    ])
+      .then(([photos, topics]) => {
+        dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: { photos } });
+        dispatch({ type: ACTIONS.SET_TOPIC_DATA, payload: { topics } });
+      })
+      .catch((err) => console.error('Failed to fetch data from API:', err));
   }, []);
 
-  // Toggle favorite status: dispatches either FAV_PHOTO_ADDED or FAV_PHOTO_REMOVED
   const updateToFavPhotoIds = (photoId) => {
     if (state.favouritePhotos.includes(photoId)) {
       dispatch({ type: ACTIONS.FAV_PHOTO_REMOVED, payload: { id: photoId } });
@@ -74,13 +79,11 @@ const useApplicationData = () => {
     }
   };
 
-  // Set the selected photo and open the modal
   const setPhotoSelected = (photo) => {
     dispatch({ type: ACTIONS.SELECT_PHOTO, payload: { photo } });
     dispatch({ type: ACTIONS.DISPLAY_PHOTO_DETAILS, payload: { displayModal: true } });
   };
 
-  // Close the modal and clear the selected photo
   const onClosePhotoDetailsModal = () => {
     dispatch({ type: ACTIONS.DISPLAY_PHOTO_DETAILS, payload: { displayModal: false } });
     dispatch({ type: ACTIONS.SELECT_PHOTO, payload: { photo: null } });

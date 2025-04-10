@@ -1,17 +1,27 @@
 import React from 'react';
-import HomeRoute from './components/HomeRoute';
 import './App.scss';
-import useApplicationData, { ACTIONS } from './hooks/useApplicationData';
+
+import HomeRoute from './components/HomeRoute';
+import PhotoDetailsModal from './routes/PhotoDetailsModal';
+import useApplicationData from './hooks/useApplicationData';
 
 const App = () => {
   const {
     state,
     updateToFavPhotoIds,
     setPhotoSelected,
-    onClosePhotoDetailsModal,
+    onClosePhotoDetailsModal
   } = useApplicationData();
 
-  // You might derive similar photos in HomeRoute or elsewhere if needed
+  // Derive similar photos from selected photo
+  const getSimilarPhotos = () => {
+    if (!state.selectedPhoto) return [];
+    return state.photos.filter(
+      (photo) =>
+        photo.id !== state.selectedPhoto.id &&
+        state.selectedPhoto.similar_photos.includes(photo.id)
+    );
+  };
 
   return (
     <div className="App">
@@ -21,10 +31,17 @@ const App = () => {
         favouritePhotos={state.favouritePhotos}
         toggleFavourite={updateToFavPhotoIds}
         onPhotoClick={setPhotoSelected}
-        displayModal={state.displayModal}
-        selectedPhoto={state.selectedPhoto}
-        onClosePhotoDetailsModal={onClosePhotoDetailsModal}
       />
+
+      {state.displayModal && state.selectedPhoto && (
+        <PhotoDetailsModal
+          photo={state.selectedPhoto}
+          onClose={onClosePhotoDetailsModal}
+          similarPhotos={getSimilarPhotos()}
+          favouritePhotos={state.favouritePhotos}
+          toggleFavourite={updateToFavPhotoIds}
+        />
+      )}
     </div>
   );
 };

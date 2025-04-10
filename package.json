@@ -1,0 +1,27 @@
+{
+  "name": "photolab",
+  "version": "1.0.0",
+  "description": "The PhotoLabs project for the Web Development React course programming.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mariahhm42/photolab.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mariahhm42/photolab/issues"
+  },
+  "homepage": "https://github.com/Mariahhm42/photolab#readme",
+  "devDependencies": {
+    "vite": "^6.2.2"
+  }
+}
