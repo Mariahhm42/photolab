@@ -1,8 +1,6 @@
 import React from 'react';
-import './App.scss';
-
 import HomeRoute from './components/HomeRoute';
-import PhotoDetailsModal from './routes/PhotoDetailsModal';
+import './App.scss';
 import useApplicationData from './hooks/useApplicationData';
 
 const App = () => {
@@ -10,10 +8,10 @@ const App = () => {
     state,
     updateToFavPhotoIds,
     setPhotoSelected,
-    onClosePhotoDetailsModal
+    onClosePhotoDetailsModal,
+    onTopicSelect,  // Get onTopicSelect from the hook
   } = useApplicationData();
 
-  // Derive similar photos from selected photo
   const getSimilarPhotos = () => {
     if (!state.selectedPhoto) return [];
     return state.photos.filter(
@@ -31,6 +29,10 @@ const App = () => {
         favouritePhotos={state.favouritePhotos}
         toggleFavourite={updateToFavPhotoIds}
         onPhotoClick={setPhotoSelected}
+        onTopicSelect={onTopicSelect}  // Pass the new function
+        displayModal={state.displayModal}
+        selectedPhoto={state.selectedPhoto}
+        onClosePhotoDetailsModal={onClosePhotoDetailsModal}
       />
 
       {state.displayModal && state.selectedPhoto && (
