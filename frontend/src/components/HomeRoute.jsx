@@ -4,14 +4,7 @@ import PhotoList from './PhotoList';
 import PhotoDetailsModal from '../routes/PhotoDetailsModal'; // Correct import path
 import '../styles/HomeRoute.scss';
 
-const HomeRoute = ({ 
-  photos, 
-  topics, 
-  favouritePhotos, 
-  toggleFavourite, 
-  onPhotoClick,
-  onTopicSelect  // New prop to handle topic clicks
-}) => {
+const HomeRoute = ({ photos, topics, favouritePhotos, toggleFavourite, onTopicSelect }) => {
   const [selectedPhoto, setSelectedPhoto] = useState(null); // State to manage the selected photo
 
   // Function to get similar photos based on certain criteria (e.g., same photographer)
@@ -26,7 +19,7 @@ const HomeRoute = ({
 
   // Handle closing the modal
   const handleCloseModal = () => {
-    setSelectedPhoto(null); // Close the modal by clearing selectedPhoto
+    setSelectedPhoto(null); // Close the modal by setting selectedPhoto to null
   };
 
   // Get similar photos based on the selected photo
@@ -34,19 +27,17 @@ const HomeRoute = ({
 
   return (
     <div className="home-route">
-      {/* Pass topics, favouritePhotos, and onTopicSelect to TopNavigationBar */}
-      <TopNavigationBar 
-        topics={topics} 
-        favouritePhotos={favouritePhotos} 
-        onTopicSelect={onTopicSelect} 
-      />
+      {/* Pass topics and favouritePhotos to TopNavigationBar */}
+      <TopNavigationBar topics={topics} 
+      favouritePhotos={favouritePhotos} 
+      onTopicSelect={onTopicSelect}/>
       
       {/* Render the PhotoDetailsModal when a photo is selected */}
       {selectedPhoto && (
         <PhotoDetailsModal 
-          photo={selectedPhoto}           // Pass the selected photo data
-          onClose={handleCloseModal}        // Pass the close handler
-          similarPhotos={similarPhotos}     // Pass similar photos to the modal
+          photo={selectedPhoto} // Pass the selected photo data
+          onClose={handleCloseModal} // Pass the close handler
+          similarPhotos={similarPhotos} // Pass similar photos to the modal
           favouritePhotos={favouritePhotos} // Pass the favourite photos state
           toggleFavourite={toggleFavourite} // Pass the toggle function
         />
@@ -57,7 +48,7 @@ const HomeRoute = ({
         photos={photos}
         favouritePhotos={favouritePhotos}
         toggleFavourite={toggleFavourite}
-        onPhotoClick={onPhotoClick}  // Pass the click handler to PhotoList
+        onPhotoClick={handlePhotoClick} // Pass the click handler to PhotoList
       />
     </div>
   );
