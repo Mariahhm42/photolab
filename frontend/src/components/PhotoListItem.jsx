@@ -40,8 +40,3 @@ const PhotoListItem = ({ photo, favouritePhotos, toggleFavourite, onClick }) => 
 };
 
 export default PhotoListItem;
-
-
-// <div className="photo-list__info">
-//         <p>{photo.location.city}, {photo.location.country}</p>
-//         <p>{photo.user.username}</p>
