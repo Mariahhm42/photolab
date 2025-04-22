@@ -3,6 +3,7 @@ import '../styles/PhotoDetailsModal.scss';
 import closeSymbol from '../assets/closeSymbol.svg';
 import PhotoList from '../components/PhotoList';
 import PhotoFavButton from '../components/PhotoFavButton';
+import "../styles/FavIcon.scss"
 
 const PhotoDetailsModal = ({
   photo,
@@ -56,9 +57,6 @@ const PhotoDetailsModal = ({
 
           {/* Photo details */}
           <div className="photo-details-modal__info">
-            <h2 className="photo-details-modal__title">
-              {photo.description || 'Untitled Photo'}
-            </h2>
             <p className="photo-details-modal__photographer">
               Photographer: {photo.user.name}
             </p>

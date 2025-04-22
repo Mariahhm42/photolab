@@ -19,3 +19,15 @@
   position: relative;
   top: 2px;                   // Adjust vertical alignment as needed
 }
+.photo-fav-button {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 2;
+  background: white;
+  border-radius: 50%;
+  padding: 6px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+

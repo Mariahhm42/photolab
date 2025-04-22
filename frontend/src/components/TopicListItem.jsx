@@ -4,9 +4,9 @@ import "../styles/TopicListItem.scss";
 
 const TopicListItem = ({ topic, onClick }) => {
   return (
-    <button className="topic-list__item" onClick={onClick}>
+    <div className="topic-list__item" onClick={onClick} style={{ cursor: 'pointer' }}>
       {topic.title}
-    </button>
+    </div>
   );
 };
 
@@ -16,7 +16,7 @@ TopicListItem.propTypes = {
     slug: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
   }).isRequired,
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
 };
 
 export default TopicListItem;

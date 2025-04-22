@@ -1,6 +1,6 @@
 import React from "react";
 import "../styles/PhotoFavButton.scss";
-import FavIcon from './FavIcon';
+import FavIcon from "./FavIcon";
 
 const PhotoFavButton = ({ photoId, favouritePhotos, toggleFavourite }) => {
   const isFav = favouritePhotos.includes(photoId);

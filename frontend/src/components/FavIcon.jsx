@@ -1,4 +1,5 @@
 import React from 'react';
+import "../styles/FavIcon.scss"
 
 const FavIcon = ({ selected, favouriteCount }) => {
   return (

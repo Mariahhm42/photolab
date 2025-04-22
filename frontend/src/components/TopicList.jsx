@@ -4,7 +4,7 @@ import TopicListItem from "./TopicListItem";
 
 const TopicList = ({ topics, onTopicSelect }) => {
   return (
-    <div className="topic-list">
+    <div className="top-nav-bar">
   {topics.map((topic) => (
     <TopicListItem
       key={topic.id}
