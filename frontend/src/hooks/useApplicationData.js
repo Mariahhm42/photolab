@@ -60,8 +60,8 @@ const useApplicationData = () => {
   // Fetch photo and topic data from the API on first render
   useEffect(() => {
     Promise.all([
-      fetch('http://localhost:8001/api/photos').then((res) => res.json()),
-      fetch('http://localhost:8001/api/topics').then((res) => res.json())
+      fetch('/api/photos').then((res) => res.json()),
+      fetch('/api/topics').then((res) => res.json())
     ])
       .then(([photos, topics]) => {
         dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: { photos } });
@@ -70,7 +70,6 @@ const useApplicationData = () => {
       .catch((err) => console.error('Failed to fetch data from API:', err));
   }, []);
 
-  // Toggle favorite status: dispatch FAV_PHOTO_ADDED or FAV_PHOTO_REMOVED
   const updateToFavPhotoIds = (photoId) => {
     if (state.favouritePhotos.includes(photoId)) {
       dispatch({ type: ACTIONS.FAV_PHOTO_REMOVED, payload: { id: photoId } });
@@ -79,21 +78,18 @@ const useApplicationData = () => {
     }
   };
 
-  // Set the selected photo and open the modal
   const setPhotoSelected = (photo) => {
     dispatch({ type: ACTIONS.SELECT_PHOTO, payload: { photo } });
     dispatch({ type: ACTIONS.DISPLAY_PHOTO_DETAILS, payload: { displayModal: true } });
   };
 
-  // Close the modal and clear the selected photo
   const onClosePhotoDetailsModal = () => {
     dispatch({ type: ACTIONS.DISPLAY_PHOTO_DETAILS, payload: { displayModal: false } });
     dispatch({ type: ACTIONS.SELECT_PHOTO, payload: { photo: null } });
   };
 
-  // New: Fetch photos for a given topic
   const onTopicSelect = (topicId) => {
-    fetch(`http://localhost:8001/api/topics/${topicId}/photos`)
+    fetch(`/api/topics/${topicId}/photos`)
       .then((res) => res.json())
       .then((photos) => {
         dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: { photos } });

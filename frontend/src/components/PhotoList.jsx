@@ -1,6 +1,5 @@
 import React from "react";
 import PhotoListItem from "./PhotoListItem";
-import PhotoDetailsModal from '../routes/PhotoDetailsModal'; // Correct import path
 import "../styles/PhotoList.scss";
 
 const PhotoList = ({ photos, favouritePhotos, toggleFavourite, onPhotoClick, setDisplayModal }) => {

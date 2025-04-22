@@ -1,17 +1,16 @@
 import React from "react";
 import "../styles/TopicList.scss";
+import TopicListItem from "./TopicListItem";
 
 const TopicList = ({ topics, onTopicSelect }) => {
   return (
     <div className="topic-list">
       {topics.map((topic) => (
-        <button 
-          key={topic.id} 
-          className="topic-list__item" 
-          onClick={() => onTopicSelect(topic.id)}  // Call onTopicSelect with the topic id
-        >
-          {topic.title}
-        </button>
+        <TopicListItem
+          key={topic.id}
+          topic={topic}
+          onClick={() => onTopicSelect(topic.id)}
+        />
       ))}
     </div>
   );

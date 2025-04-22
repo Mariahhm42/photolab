@@ -2,6 +2,7 @@ import React from 'react';
 import PhotoFavButton from './PhotoFavButton';
 import "../styles/PhotoListItem.scss";
 
+
 const PhotoListItem = ({ photo, favouritePhotos, toggleFavourite, onClick }) => {
   return (
     <div className="photo-list__item">
